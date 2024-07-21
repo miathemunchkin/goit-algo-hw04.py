@@ -1,6 +1,6 @@
-goit-slgo-hw-04.py
+#goit-slgo-hw-04.py
 
-Завдання 1
+#Завдання 1
 def total_salary(path):
     total_salary = 0
     num_developers = 0
@@ -35,7 +35,7 @@ if total is not None and average is not None:
     print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
 
 
-Завдання 2
+#Завдання 2
 def get_cats_info(path):
     cats_info = []
 
@@ -60,18 +60,22 @@ cats_info = get_cats_info("path/to/cats_file.txt")
 print(cats_info)
 
 
-Завдання 4
+#Завдання 4
 def parse_input(user_input):
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, args
 
 def add_contact(args, contacts):
+    if len(args) < 2:
+        return "Please provide both name and phone number."
     name, phone = args
     contacts[name] = phone
     return "Contact added."
 
 def change_contact(args, contacts):
+    if len(args) < 2:
+        return "Please provide both name and phone number."
     name, phone = args
     if name in contacts:
         contacts[name] = phone
@@ -85,6 +89,15 @@ def show_contacts(contacts):
             print(f"Name: {name}, Phone: {phone}")
     else:
         print("No contacts found.")
+
+def get_phone(args, contacts):
+    if len(args) < 1:
+        return "Please provide a name."
+    name = args[0]
+    if name in contacts:
+        return f"Phone number for {name}: {contacts[name]}"
+    else:
+        return "Contact not found."
 
 def main():
     contacts = {}
@@ -103,6 +116,10 @@ def main():
         elif command == "change":
             print(change_contact(args, contacts))
         elif command == "show":
+            show_contacts(contacts)
+        elif command == "phone":
+            print(get_phone(args, contacts))
+        elif command == "all":
             show_contacts(contacts)
         else:
             print("Invalid command.")
